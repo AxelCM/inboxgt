@@ -51,14 +51,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'common',
     'shipping',
-    'users',
+    'user',
     'channels',
     'channels_redis'
 
 
 ]
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'user.User'
 
 
 MIDDLEWARE = [
@@ -100,7 +100,7 @@ ASGI_APPLICATION = "inboxgt.routing.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))
     }
 }
 

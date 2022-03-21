@@ -3,7 +3,7 @@ from django.db import models
 #Models
 from common.models import DataControl
 
-from users.models import User
+from user.models import User
 
 class Shipping(DataControl):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

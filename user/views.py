@@ -13,9 +13,9 @@ from django.contrib.auth.hashers import make_password
 from django.views.generic import TemplateView
 
 #imports from models
-from users.models import User, Sucursal
+from user.models import User, Sucursal
 
-from users.forms import SignUpForm , UpdateUserForm
+from user.forms import SignUpForm , UpdateUserForm
 
 #date and time library
 from datetime import *
@@ -24,7 +24,7 @@ from datetime import *
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
 
-# from users.serializers import UserSerializer
+# from user.serializers import UserSerializer
 
 class SignUp(NotPermissionsRule, SuccessMessageMixin, CreateView):
     permission_required = 'ordenes.managaer_full_view'
