@@ -1,0 +1,51 @@
+<div class="modal fade" id="UserInfo{{u.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">INFORMACIÓN del usuario</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+
+        <div class="form-row">
+        <form action="{%url "update_user_form" u.pk%}" method="post">
+          {%csrf_token%}
+            <div class="form-row">
+                <label>Nombres
+                <input class="form-control" type="text" name="first_name" value="{{u.first_name}}">
+              </label>
+                <label>Apellidos
+                  <input class="form-control" type="text" name="last_name" value="{{u.last_name}}">
+                </label>
+                <br>
+
+            <div class="col-5">
+              <label>Tienda</label>
+              <select class="form-control" name="sucursal" value='{{u.sucursal.pk}}'>
+              {%for s in sucursals%}
+              <option value="{{s.pk}}"
+              {% if u.sucursal.pk == s.sucursal.pk %} selected='selected'{% endif %}>
+              {{s.name|capfirst}}
+              </option>
+
+              {%endfor%}
+            </select>
+            </div>
+          </div>
+          </div>
+
+        </div>
+
+        </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+        <input type="submit"  class="btn btn-primary" value="Guardar">
+        <p>
+      </p>
+      </div>
+    </div>
+  </div>
+</div>

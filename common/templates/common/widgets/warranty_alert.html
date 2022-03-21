@@ -1,0 +1,8 @@
+{% if warranty_counter %}
+<div class="alert alert-danger">
+  <p align='center'>**<b>Tienes {{warranty_counter}} {% if warranty_counter == 1 %}Servicio{% else %}Servicios{% endif %} de nuevo por GARANTÍA</b>**</p>
+  {% if service_list %}
+  <p align="center">No puedes asignarte otros servicios hasta que resuelvas los casos de reingreso por garantía!</p>
+  {% endif %}
+</div>
+{% endif %}

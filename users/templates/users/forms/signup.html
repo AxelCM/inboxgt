@@ -1,0 +1,82 @@
+{%extends 'common/base.html'%}
+{%block title%} CREAR USUARIO {%endblock title%}
+{%load static%}
+
+{%block content%}
+{%include 'common/widgets/form_errors.html'%}
+{%include "common/mensajes.html"%}
+
+
+
+<div class="col sm-8">
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">AGREGAR UN USUARIO</h6>
+  </div>
+  <div class="card-body">
+    <form action="{%url "signup"%}" method="post">
+      {%csrf_token%}
+      <div class="form-row">
+        <div class="col-3">
+          <label for="">Nombre de Usuario</label>
+          <input class="form-control" type="text" name="username" value="" placeholder="Nombre de usuario" autocomplete="off">
+        </div>
+        <div class="col-3">
+          <label for="">Contraseña</label>
+          <input class="form-control" type="password" name="password" value="" placeholder="Contraseña" autocomplete="off">
+        </div>
+        <div class="col-2">
+          <label>Activar</label>
+          <input type="checkbox" name="is_active" id="id_is_active" checked="">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-3">
+          <label>Nombres</label>
+          <input class="form-control" type="text" name="first_name" placeholder="Nombres" autocomplete="off">
+        </div>
+        <div class="col-3">
+          <label>Apellidos</label>
+          <input class="form-control" type="text" name="last_name" placeholder="Apellidos" autocomplete="off">
+        </div>
+        <div class="col-3">
+          <label>Correo</label>
+          <input class="form-control" type="text" name="email" placeholder="Correo electronico"autocomplete="off">
+        </div>
+      </div>
+      <hr>
+        <div class="form-row">
+          <div class="col-3">
+            <label>Grupo a pertenecer</label>
+          <select class="form-control" name="groups">
+            {%for g in groups%}
+              <option value="{{g.pk}}">{{g.name}}</option>
+            {%endfor%}
+          </select>
+          </div>
+          <div class="col-3">
+            <label>Tienda a pertenecer</label>
+            <select class="form-control" name="sucursal">
+            {%for s in sucursals%}
+            <option value="{{s.pk}}">{{s.name}} - {{s.address}}</option>
+            {%endfor%}
+          </select>
+          </div>
+        </div>
+        <input type="hidden" name="date_joined" value="{{now|date:"Y-m-d H:i:s"}}">
+        <br>
+        <input class="btn btn-primary" type="submit" value="Crear y Guardar">
+      </div>
+    </div>
+    </form>
+</div>
+
+{%endblock content%}
+
+
+
+{%block plugin%}
+
+<script>
+</script>
+{%endblock plugin%}

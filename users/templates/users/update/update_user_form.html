@@ -1,0 +1,69 @@
+{%extends 'ordenes/base.html'%}
+{%block title%}USUARIOS{%endblock title%}
+{%load static%}
+
+{%block content%}
+{%include 'ordenes/widgets/form_errors.html'%}
+{%include "ordenes/mensajes.html"%}
+<div class="album py-5 bg-light">
+
+  <div class="container">
+<br>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm" style="width: 30rem;">
+          <div class="card-body">
+            <p class="card-text" align="center">{{object.username}} - {{object.first_name}} {{object.last_name}}</p>
+            <em>Sucursal Actual : <b>{{object.sucursal.name}}</b></em>
+            <hr>
+            <hr>
+            <div>
+              <form action="{%url "update_user_form" object.pk%}" method="post">
+                {%csrf_token%}
+                  <div class="form-row">
+                      <label>Nombres
+                      <input class="form-control" type="text" name="first_name" value="{{object.first_name}}">
+                    </label>
+                      <label>Apellidos
+                        <input class="form-control" type="text" name="last_name" value="{{object.last_name}}">
+                      </label>
+                    <label>Correo Electronico</label>
+                    <input class="form-control" type="text" name="email" value="{{object.email}}">
+                    <label>Tienda</label>
+                    <select class="form-control" id="exampleFormControlSelect1" value="{{object.sucursal.pk}}" name="sucursal">
+                    {% for s in sucursals %}
+                       <option value="{{s.pk}}"
+                           {% if object.sucursal.pk == s.pk %}selected="selected"{% endif %}>
+                           {{s.name|capfirst}}
+                       </option>
+                    {% endfor %}
+
+                  </select>
+                  <div class="col-6">
+                    <label>Grupo</label>
+                  <select class="form-control" name="groups">
+                    {%for g in groups%}
+                      <option value="{{g.pk}}"
+                      {% if object.groups.all.0.pk == g.pk %}selected="selected"{% endif %}>
+                      {{g.name|capfirst}}
+                      </option>
+                    {%endfor%}
+                  </select>
+                  </div>
+                </div>
+                  <br>
+                  <a class="btn btn-danger" href="{%url "user_list"%}">Cancelar</a>
+                  <input type="submit" class="btn btn-primary"  value="Guardar">
+                </div>
+              <div class="btn-group">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+{%endblock content%}

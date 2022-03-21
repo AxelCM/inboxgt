@@ -1,0 +1,62 @@
+{%extends 'common/base.html'%}
+{%block title%}USUARIOS{%endblock title%}
+{%load static%}
+{%block content%}
+{%include 'common/widgets/form_errors.html'%}
+{%include "common/mensajes.html"%}
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">ACTUALIZAR USUARIO</h6>
+  </div>
+<div class="card-body">
+  <div class="table-responsive">
+    <table class="table table-hover" id="TableResult" width="100%" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Nombre</th>
+          <th>Sucursal</th>
+          <th>Grupo</th>
+          <th>+</th>
+        </tr>
+      </thead>
+    <tbody>
+      {%for u in users%}
+      <tr>
+        <td>{{u.username}}</td>
+        <td>{{u.first_name}} {{u.last_name}}</td>
+        <td>{{u.sucursal.name}}</td>
+        <td>{{u.groups.all.0}}</td>
+        <td>
+          <a class="btn btn-primary" href="{%url "update_user_form" u.pk%}">Actualizar</a>
+        </td>
+      </tr>
+
+      {%endfor%}
+    </tbody>
+    </table>
+  </div>
+  </div>
+
+  {%for u in users%}
+  {%include "users/edit_user.html"%}
+  {%endfor%}
+
+
+
+{%block plugin%}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+{%include 'common/components/dataTable-es.js'%}
+</script>
+
+{%if messages%}
+<script>
+  {%include 'common/components/sweet_alert.js'%}
+  {%include 'common/components/sweet_alert_error.js'%}
+
+</script>
+{%endif%}
+
+{%endblock plugin%}
+{%endblock content%}
